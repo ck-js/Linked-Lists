@@ -52,7 +52,7 @@ tail() {
 }
 at(index) {
     if (!this.HEAD) return null;
-    
+
     let array = [];
     let current = this.HEAD;
     while (current) {
@@ -61,6 +61,31 @@ at(index) {
     }
     
     return array[index];
+}
+// pop removes the last node from the list
+pop() {
+    if (!this.HEAD) return null;
+    if (!this.HEAD.next) {
+        const removedValue = this.HEAD.value;
+        this.HEAD = null;
+        return removedValue
+    }
+    let current = this.HEAD;
+    let previous = null;
+    // traverse to second last node
+    while (current.next) {
+        previous = current;
+        current = current.next;
+    }
+    const removedValue = current.value;
+    previous.next = null;
+
+    return removedValue;
+
+}
+// contains method checks if the list contains a value
+contains(value) {
+    
 }
   };
 
@@ -73,16 +98,21 @@ at(index) {
       }
     
 const list1 = new LinkedList();
-// list1.append(1);
-// list1.append(2);
-// list1.prepend(3);
-list1.size()
+list1.append(1);
+list1.append(2);
+list1.prepend(3);
+// list1.append(4);
+
+
+list1.pop()
+// list1.pop()
 const firstNode = list1.head();
 const lastNode = list1.tail();
-const getByIndex = list1.at(0)
-console.log(getByIndex);
+const getByIndex = list1.at(3)
 
 
-// console.log(lastNode);
+console.log(list1.size())
+// console.log(getByIndex);
+console.log(lastNode);
 // console.log(firstNode);
-console.log(list1); 
+console.log(list1.head()); 
