@@ -85,8 +85,58 @@ pop() {
 }
 // contains method checks if the list contains a value
 contains(value) {
-    
+    let current = this.HEAD;
+    while (current) {
+        if (current.value === value) return true;
+        current = current.next;
+    }
+    return false;
 }
+find(value) {
+    let current = this.HEAD;
+    let array = [];
+    while (current) {
+        array.push(current.value);
+        if (current.value === value) 
+            return array.length - 1;
+        current = current.next;
+    }
+    return null;
+}
+toString(){
+    let current = this.HEAD;
+    let string = '';
+    while (current) {
+        // string += current.value + ' ';
+        string += `( ${current.value} ) ->`;
+        current = current.next;
+    }
+    return `${string} null`
+}
+insertAt(value, index) {
+const newNode = new Node(value);
+let current = this.HEAD;
+
+if (index === 0) {
+    newNode.next = this.HEAD;
+this.HEAD = newNode;
+return;
+
+}
+let previous = null;
+let count = 0;
+while (count < index) {
+    count++;
+    previous = current;
+    current = current.next;
+}
+previous.next = newNode;
+newNode.next = current;
+
+
+}
+
+
   };
 
     // node class containing a value property and link to next node
@@ -98,20 +148,23 @@ contains(value) {
       }
     
 const list1 = new LinkedList();
-list1.append(1);
-list1.append(2);
-list1.prepend(3);
+// list1.append(1);
+// list1.append(2);
+// list1.prepend(3);
 // list1.append(4);
+list1.insertAt(5, 0);
 
-
-list1.pop()
+// list1.pop()
 // list1.pop()
 const firstNode = list1.head();
 const lastNode = list1.tail();
 const getByIndex = list1.at(3)
 
 
-console.log(list1.size())
+console.log(list1.toString());
+// console.log(list1.find(4));
+// console.log(list1.contains(0));
+// console.log(list1.size())
 // console.log(getByIndex);
 console.log(lastNode);
 // console.log(firstNode);
